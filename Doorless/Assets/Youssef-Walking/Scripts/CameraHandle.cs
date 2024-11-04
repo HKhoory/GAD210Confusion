@@ -14,35 +14,47 @@ public class CameraHandle : MonoBehaviour
 
     void Start()
     {
-        //locks the cursor int the middle and makes the mouse curor disapper
+        // Locks the cursor in the middle and makes the mouse cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-
     void Update()
     {
-        //call Moving function
+        // Call Moving function
         Moving();
 
-        //get mouse movemnts 
+        // Get mouse movements 
         MouseX += Input.GetAxis("Mouse X");
         MouseY += Input.GetAxis("Mouse Y");
 
-        //limits camaera movment angle
+        // Limits camera movement angle
         MouseY = Mathf.Clamp(MouseY, -45, 60);
 
-        //handles rotation
-        transform.rotation = Quaternion.Euler(0, MouseX, 0);
-        Camera.main.transform.rotation = Quaternion.Euler(-MouseY, MouseX, 0);
+        // Handles rotation of the player and the camera
+        HandleCameraRotation();
     }
 
     private void Moving()
     {
-        //vertical axis for W and S keys or up and down arrows
-        //horizontal axis for A and D keys or left and right arrows
-
+        // Vertical axis for W and S keys or up and down arrows
+        // Horizontal axis for A and D keys or left and right arrows
         verticalAxis = Input.GetAxis("Vertical");
         horizontalAxis = Input.GetAxis("Horizontal");
+    }
 
+    private void HandleCameraRotation()
+    {
+        // Rotate the player based on mouse input
+        transform.rotation = Quaternion.Euler(0, MouseX, 0); // Rotate player horizontally
+
+        // Rotate the camera based on mouse input
+        Camera.main.transform.localRotation = Quaternion.Euler(-MouseY, 0, 0); // Rotate camera vertically
+    }
+
+    // Call this function to set the rotation from external scripts
+    public void SetPlayerRotation(float yRotation)
+    {
+        MouseX = yRotation; // Update the horizontal rotation based on teleport
+        transform.rotation = Quaternion.Euler(0, MouseX, 0); // Set the player's rotation
     }
 }

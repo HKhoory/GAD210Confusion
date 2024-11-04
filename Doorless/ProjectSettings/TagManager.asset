@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Sound1
+  - Sound2
+  - Sound5
+  - Sound3
+  - Sound4
   layers:
   - Default
   - TransparentFX

@@ -31,12 +31,10 @@ public class Movement : MonoBehaviour
         float hAxis = Input.GetAxis("Horizontal");
 
         direction = (mainCam.forward * vAxis) + (mainCam.right * hAxis);
-
         direction.Normalize();
-        direction.y = 0;
+        direction.y = 0; // Prevent vertical movement from player input
 
-        direction *= speed;
-
-        rb.velocity = direction;
+        // Set the horizontal velocity based on input
+        rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
     }
 }
