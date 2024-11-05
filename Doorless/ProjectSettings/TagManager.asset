@@ -9,6 +9,7 @@ TagManager:
   - Sound5
   - Sound3
   - Sound4
+  - Room
   layers:
   - Default
   - TransparentFX
