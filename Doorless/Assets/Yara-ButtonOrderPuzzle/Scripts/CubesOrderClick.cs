@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CubesOrderClick : MonoBehaviour
 {
+
+    [SerializeField] private GameObject cam;
+    [SerializeField] private Camera camerat;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam.GetComponent<Camera>();
+        camerat.GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -21,9 +26,10 @@ public class CubesOrderClick : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Check for mouse click
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray1 = camerat.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray1, out hit))
             {
                 string clickedNameTag = hit.transform.gameObject.tag;
                 clickedOrderTags.Add(clickedNameTag);
