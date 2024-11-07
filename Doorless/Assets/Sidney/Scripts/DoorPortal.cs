@@ -23,23 +23,27 @@ public class DoorPortal : MonoBehaviour
                 {
                     if (door.teleportLocation != null)
                     {
+                        // Disable CharacterController temporarily to allow direct position change
+                        CharacterController controller = other.GetComponent<CharacterController>();
+                        if (controller != null) controller.enabled = false;
+
                         // Teleport the player to the specified teleport location
                         other.transform.position = door.teleportLocation.position;
 
-                        // Log current rotation before change
-                        Debug.Log("Current Player Rotation: " + other.transform.eulerAngles);
-                        Debug.Log("Teleport Location Rotation: " + door.teleportLocation.eulerAngles);
-
-                        // Rotate the player using the CameraHandle's method
+                        // Rotate the player on the Y axis
                         CameraHandle cameraHandle = other.GetComponentInChildren<CameraHandle>();
                         if (cameraHandle != null)
                         {
                             cameraHandle.SetPlayerRotation(door.teleportLocation.eulerAngles.y);
                         }
 
+                        // Re-enable CharacterController after teleport
+                        if (controller != null) controller.enabled = true;
+
                         // Start cooldown to prevent immediate re-teleporting
                         StartCoroutine(TeleportCooldown());
 
+                        Debug.Log("Teleport successful.");
                         break;
                     }
                     else

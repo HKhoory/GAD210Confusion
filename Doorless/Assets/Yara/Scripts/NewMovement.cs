@@ -11,10 +11,13 @@ public class NewMovement : MonoBehaviour
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     bool isMovingPressed;
-    float rotationFactorFramed; 
     CharacterController characterController;
-    float rotationFactorPerFrame = 15.0f ; 
-    // Start is called before the first frame update
+
+    private bool externalRotationSet = false;
+    private float targetYRotation;
+
+    float rotationFactorPerFrame = 15.0f;
+
     void Awake()
     {
         playerInputs = new PlayerInputs();
@@ -24,21 +27,18 @@ public class NewMovement : MonoBehaviour
         playerInputs.CharacterControls.Move.canceled += onMovementInput;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        handleRotation(); 
-        characterController.Move(currentMovement * Time.fixedDeltaTime); 
-        
+        handleRotation();
+        characterController.Move(currentMovement * Time.fixedDeltaTime);
     }
 
     void onMovementInput(InputAction.CallbackContext context)
     {
-        
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.z = currentMovementInput.y;
-        isMovingPressed = currentMovementInput.x != 0 || currentMovementInput.y !=0;
+        isMovingPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
 
     void handleRotation()
@@ -47,25 +47,38 @@ public class NewMovement : MonoBehaviour
         Quaternion currentRotation;
         Quaternion targetRotation;
 
+        if (externalRotationSet) // Apply external rotation if set
+        {
+            transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
+            externalRotationSet = false; // Reset flag after applying
+            return;
+        }
+
         positionToLookAt.x = currentMovement.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z; 
+        positionToLookAt.z = currentMovement.z;
         currentRotation = transform.rotation;
-        if(isMovingPressed) 
+
+        if (isMovingPressed)
         {
-            
-            targetRotation = Quaternion.LookRotation(positionToLookAt); 
+            targetRotation = Quaternion.LookRotation(positionToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
         }
-            
     }
+
+    public void SetFacingDirectionY(float yRotation)
+    {
+        targetYRotation = yRotation;
+        externalRotationSet = true;
+    }
+
     void OnEnable()
     {
         playerInputs.CharacterControls.Enable();
     }
-    
+
     void OnDisable()
     {
-        playerInputs.CharacterControls.Disable ();
+        playerInputs.CharacterControls.Disable();
     }
 }
