@@ -16,7 +16,8 @@ public class NewMovement : MonoBehaviour
     private bool externalRotationSet = false;
     private float targetYRotation;
 
-    float rotationFactorPerFrame = 15.0f;
+    [SerializeField] float rotationFactorPerFrame = 15.0f;
+    [SerializeField] float movementSpeed = 5f;
 
     void Awake()
     {
@@ -30,7 +31,7 @@ public class NewMovement : MonoBehaviour
     void Update()
     {
         handleRotation();
-        characterController.Move(currentMovement * Time.fixedDeltaTime);
+        characterController.Move(currentMovement * movementSpeed * Time.fixedDeltaTime);
     }
 
     void onMovementInput(InputAction.CallbackContext context)
