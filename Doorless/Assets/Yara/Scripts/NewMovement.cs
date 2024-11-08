@@ -32,6 +32,7 @@ public class NewMovement : MonoBehaviour
     {
         handleRotation();
         characterController.Move(currentMovement * movementSpeed * Time.fixedDeltaTime);
+
     }
 
     void onMovementInput(InputAction.CallbackContext context)
@@ -66,6 +67,8 @@ public class NewMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
         }
     }
+
+
 
     public void SetFacingDirectionY(float yRotation)
     {
