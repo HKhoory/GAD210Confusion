@@ -14,7 +14,14 @@ public class CoinCollector : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            audioSource.PlayOneShot(coinSound);
+            if(coinSound != null) 
+            {
+                audioSource.PlayOneShot(coinSound);
+            }
+            else
+            {
+                Debug.Log("MISSING AUDIOOOO");
+            }
             Destroy(other.gameObject); // Destroy the coin after collection
         }
     }

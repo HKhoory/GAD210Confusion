@@ -10,6 +10,7 @@ TagManager:
   - Sound3
   - Sound4
   - Room
+  - Coin
   layers:
   - Default
   - TransparentFX
