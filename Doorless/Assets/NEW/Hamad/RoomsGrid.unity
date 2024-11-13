@@ -2356,7 +2356,7 @@ PrefabInstance:
       objectReference: {fileID: 1713946648}
     - target: {fileID: 2565618234386296817, guid: def921043bb4eb94aad9677748cb599c, type: 3}
       propertyPath: movementSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5775249536449719246, guid: def921043bb4eb94aad9677748cb599c, type: 3}
       propertyPath: m_LocalScale.x
@@ -6466,6 +6466,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1552796473}
     m_Modifications:
+    - target: {fileID: 1797589358851901204, guid: 76f3a70957f7e264aa27f16d131b87d2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3923076
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797589358851901204, guid: 76f3a70957f7e264aa27f16d131b87d2, type: 3}
+      propertyPath: m_Size.z
+      value: 4.0541134
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797589358851901204, guid: 76f3a70957f7e264aa27f16d131b87d2, type: 3}
+      propertyPath: m_Center.x
+      value: -0.19615388
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797589358851901204, guid: 76f3a70957f7e264aa27f16d131b87d2, type: 3}
+      propertyPath: m_Center.z
+      value: -0.15705657
+      objectReference: {fileID: 0}
     - target: {fileID: 2155044103481173515, guid: 76f3a70957f7e264aa27f16d131b87d2, type: 3}
       propertyPath: m_Name
       value: TeleportingDoor
