@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoinCollector : MonoBehaviour
 {
+    public GameObject winPanel; 
+    public AudioClip winSound; 
     public AudioClip coinSound;
     private AudioSource audioSource;
 
@@ -24,5 +27,15 @@ public class CoinCollector : MonoBehaviour
             }
             Destroy(other.gameObject); // Destroy the coin after collection
         }
+    }
+
+    public void TriggerWinCondition()
+    {
+        // Play win sound
+        audioSource.PlayOneShot(winSound);
+
+        // Display win panel
+        winPanel.SetActive(true);
+
     }
 }
